@@ -1,4 +1,4 @@
-
+using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,11 +19,12 @@ public class Program
                 );
         });
 
+        builder.Services.AddCors();
         var app = builder.Build();
-
-        // Configure the HTTP request pipeline.
-        // Middlewares
         
+        // Configure the HTTP request pipeline.
+        //! Middlewares (order is important)
+        app.UseCors(x=>x.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:4200","https://localhost:4200"));
         app.MapControllers();
 
         app.Run();
