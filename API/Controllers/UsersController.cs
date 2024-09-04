@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-[Authorize]
+// [Authorize]
 public class UsersController(DataContext context) : BaseApiController
 {
     [AllowAnonymous]
@@ -23,7 +23,7 @@ public class UsersController(DataContext context) : BaseApiController
     public async Task<ActionResult<AppUser>> GetUser(int id)
     {
         var user = await context.Users.FindAsync(id);
-        if(user is null) return NotFound();
+        if (user is null) return NotFound();
         return user;
     }
 }

@@ -13,7 +13,7 @@ public class TokenService(IConfiguration config) : ITokenService
     //! from the config files to sign the JWTs
     public string CreateToken(AppUser user)
     {
-        var tokenKey = config["TokenKey"] ?? 
+        var tokenKey = config["TokenKey"] ??
             throw new Exception("Cannot access TokenKey from appsettings");
         if (tokenKey.Length < 64)
             throw new Exception("TokenKey must be longer!");
@@ -38,13 +38,13 @@ public class TokenService(IConfiguration config) : ITokenService
         {
             Subject = new ClaimsIdentity(claims),
             Expires = DateTime.UtcNow.AddDays(7),
-            SigningCredentials = new SigningCredentials(key,SecurityAlgorithms.HmacSha512Signature)
+            SigningCredentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature)
         };
 
         //! 4) Creating the token handler, creating the token and writing the token as response using the token handler
         var tokenHandler = new JwtSecurityTokenHandler();
         var token = tokenHandler.CreateToken(tokenDescriptor);
-        
+
         return tokenHandler.WriteToken(token);
     }
 }
