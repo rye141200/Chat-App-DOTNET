@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
   <div class="container">
-    <a class="navbar-brand" href="#">Social X</a>
+    <a class="navbar-brand" routerLink="/">Social X</a>
     <!-- <button
       class="navbar-toggler"
       type="button"
@@ -12,22 +12,30 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button> -->
-    @if(accountService.currentUser()){
+
     <ul class="navbar-nav me-auto mb-2 mb-md-0">
+      @if(accountService.currentUser()){
       <li class="nav-item">
-        <a class="nav-link">Friends</a>
+        <a routerLink="/members" routerLinkActive="active" class="nav-link"
+          >Friends</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link">Lists</a>
+        <a routerLink="/lists" routerLinkActive="active" class="nav-link"
+          >Lists</a
+        >
       </li>
       <li class="nav-item">
-        <a class="nav-link">Messages</a>
+        <a routerLink="/messages" routerLinkActive="active" class="nav-link"
+          >Messages</a
+        >
       </li>
-      <li class="nav-item">
+      }
+      <!-- <li class="nav-item">
         <a class="nav-link" (click)="logout()">Logout</a>
-      </li>
+      </li> -->
     </ul>
-    } @if(!accountService.currentUser()) {
+    @if(!accountService.currentUser()) {
     <form
       #loginForm="ngForm"
       (ngSubmit)="login()"
@@ -47,12 +55,12 @@
         type="password"
         placeholder="Password"
       />
-      <button class="btn btn-outline-success" type="submit">Login</button>
+      <button class="btn btn-success" type="submit">Login</button>
     </form>
     } @if(accountService.currentUser()){
     <div class="dropdown" dropdown>
       <a dropdownToggle class="text-decoration-none dropdown-toggle text-light"
-        >Welcome {{ accountService.currentUser()?.username }}</a
+        >Welcome {{ accountService.currentUser()?.username | titlecase }}</a
       >
       <div *dropdownMenu class="dropdown-menu">
         <a class="dropdown-item">Edit profile</a>
