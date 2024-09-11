@@ -10,6 +10,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
+//! Note that the constructor paramters are syntactic sugar for
+//! private field named P or whatever, holding the value of the paramter
+//! so if you need to use its value outside 
+//! you would need to make a property
 public class AccountController(DataContext context,ITokenService tokenService) : BaseApiController
 {
     [HttpPost("register")] //api/account/register
