@@ -28,6 +28,9 @@ public static class AppServiceExtensions
          */
         services.AddCors();
         services.AddScoped<ITokenService, TokenService>();
+        // services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped(typeof(IGenericRepository<,>), typeof(GenericRepository<,>));
+        services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         return services;
     }
 }
